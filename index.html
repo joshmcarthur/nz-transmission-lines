@@ -41,6 +41,19 @@ var projection = d3.geo.mercator()
   .translate([width / 2, height / 2]);
 
 
+var zoomed = function() {
+  container.attr('transform', "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
+  container.selectAll('.place-label').style('font-size', 8 / d3.event.scale + 'px');
+  container.selectAll('.transmission-line').style('stroke-width', 0.5 / d3.event.scale + 'px');
+}
+
+
+var zoom =  d3.behavior.zoom()
+  .scale(1)
+  .scaleExtent([1, 8])
+  .translate([0, 0])
+  .on('zoom', zoomed);
+
 var svg = d3.select('body').append('svg')
   .attr('width', width)
   .attr('height', height);
