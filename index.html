@@ -82,7 +82,7 @@ svg.append("rect")
 
 d3.json("data/nz.json", function(error, nz) {
   if (error) { return console.error(error); }
-  var boundary = topojson.feature(nz, nz.objects.new_zealand)
+  var boundary = topojson.feature(nz, nz.objects.new_zealand);
 
   container.append('path')
     .datum(boundary)
