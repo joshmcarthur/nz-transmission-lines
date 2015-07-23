@@ -44,6 +44,10 @@ var svg = d3.select('body').append('svg')
   .attr('width', width)
   .attr('height', height);
 
+var path = d3.geo.path()
+  .projection(projection)
+  .pointRadius(2);
+
 var attribution = d3.select('body').append('cite')
   .attr('class', 'attribution')
   .text('Transmission Line data courtesy of Transpower: Licensed CC BY 3.0 NZ.');
@@ -56,9 +60,6 @@ var source = d3.select('body').append('a')
 d3.json("data/nz.json", function(error, nz) {
   if (error) { return console.error(error); }
   var boundary = topojson.feature(nz, nz.objects.new_zealand)
-  var path = d3.geo.path()
-    .projection(projection)
-    .pointRadius(2);
 
   svg.append('path')
     .datum(boundary)
