@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+/* CSS goes here. */
+html, body { width: 100%; height: 100%; margin: 0; padding: 0; }
+body { background: #3F51B5; }
+.new-zealand-boundary { fill: #303F9F; }
+.place { fill: #C5CAE9; opacity: 0.5; pointRadius: 1px; }
+.place-label { color: #C5CAE9; opacity: 0.5; font-size: 10px; font-family: sans-serif; }
+
+</style>
+<body>
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script src="http://d3js.org/topojson.v1.min.js"></script>
+<script>
+
+/* JavaScript goes here. */
+var width = window.innerWidth,
+    height= window.innerHeight;
+
+var svg = d3.select('body').append('svg')
+  .attr('width', width)
+  .attr('height', height);
+
+d3.json("data/nz.json", function(error, nz) {
+  if (error) { return console.error(error); }
+  var boundary = topojson.feature(nz, nz.objects.new_zealand)
+  var projection = d3.geo.mercator()
+    .scale(2000)
+    .center([174, -42])
+    .translate([width / 2, height / 2]);
+  var path = d3.geo.path()
+    .projection(projection)
+    .pointRadius(3);
+
+  svg.append('path')
+    .datum(boundary)
+    .attr('d', path)
+    .attr('class', 'new-zealand-boundary');
+
+  svg.append('path')
+    .datum(topojson.feature(nz, nz.objects.places))
+    .attr('d', path)
+    .attr('class', 'place');
+
+  svg.selectAll(".place-label")
+      .data(topojson.feature(nz, nz.objects.places).features)
+    .enter().append("text")
+      .attr("class", "place-label")
+      .attr("transform", function(d) { return "translate(" + projection(d.geometry.coordinates) + ")"; })
+      .attr("dy", ".35em")
+      .text(function(d) { return d.properties.name; });
+
+  svg.selectAll(".place-label")
+    .attr("x", function(d) { return d.geometry.coordinates[0] > 174? 6 : -6; })
+    .style("text-anchor", function(d) { return d.geometry.coordinates[0] > 174 ? "start" : "end"; });
+});
+
+</script>

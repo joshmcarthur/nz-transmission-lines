@@ -1,0 +1,30 @@
+{
+  "name": "national-grid",
+  "version": "0.0.0",
+  "authors": [
+    "Josh McArthur <joshua.mcarthur@gmail.com>"
+  ],
+  "description": "D3 diagram showing NZ National Electricity Grid",
+  "main": "index.html",
+  "moduleType": [
+    "amd",
+    "es6"
+  ],
+  "keywords": [
+    "nz",
+    "opendata",
+    "d3"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/joshmcarthur/national-grid",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "d3": "~3.5.6"
+  }
+}

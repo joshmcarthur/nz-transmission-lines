@@ -1,0 +1,27 @@
+{
+  "name": "national-grid",
+  "version": "1.0.0",
+  "description": "National grid visualisation",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joshmcarthur/national-grid.git"
+  },
+  "keywords": [
+    "nz",
+    "opendata",
+    "d3"
+  ],
+  "author": "Josh McArthur",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/joshmcarthur/national-grid/issues"
+  },
+  "homepage": "https://github.com/joshmcarthur/national-grid#readme",
+  "devDependencies": {
+    "topojson": "^1.6.19"
+  }
+}
