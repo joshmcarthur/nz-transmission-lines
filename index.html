@@ -34,6 +34,12 @@ body { background: #3F51B5; }
 var width = window.innerWidth,
     height= window.innerHeight;
 
+var projection = d3.geo.mercator()
+  .scale(2000)
+  .center([174, -42])
+  .translate([width / 2, height / 2]);
+
+
 var svg = d3.select('body').append('svg')
   .attr('width', width)
   .attr('height', height);
@@ -50,10 +56,6 @@ var source = d3.select('body').append('a')
 d3.json("data/nz.json", function(error, nz) {
   if (error) { return console.error(error); }
   var boundary = topojson.feature(nz, nz.objects.new_zealand)
-  var projection = d3.geo.mercator()
-    .scale(2000)
-    .center([174, -42])
-    .translate([width / 2, height / 2]);
   var path = d3.geo.path()
     .projection(projection)
     .pointRadius(2);
