@@ -9,8 +9,22 @@ body { background: #3F51B5; }
 .place { fill: #C5CAE9; opacity: 0.5; }
 .place-label { fill: #C5CAE9; opacity: 0.5; font-size: 8px; font-family: sans-serif; }
 .transmission-line { stroke: #FFEB3B; stroke-width: 0.5; fill: transparent; }
+.attribution, .source-link {
+  color: #C5CAE9;
+  font-family: sans-serif;
+  font-size: 8px;
+  position: absolute;
+  opacity: 0.5;
+  bottom: 0;
+  padding: 8px;
+  text-decoration: none;
+}
+
+.attribution { left: 0; }
+.source-link { right: 0; }
 
 </style>
+<title>NZ Transmission Lines Visualisation</title>
 <body>
 <script src="http://d3js.org/d3.v3.min.js"></script>
 <script src="http://d3js.org/topojson.v1.min.js"></script>
@@ -23,6 +37,15 @@ var width = window.innerWidth,
 var svg = d3.select('body').append('svg')
   .attr('width', width)
   .attr('height', height);
+
+var attribution = d3.select('body').append('cite')
+  .attr('class', 'attribution')
+  .text('Transmission Line data courtesy of Transpower: Licensed CC BY 3.0 NZ.');
+
+var source = d3.select('body').append('a')
+  .attr('class', 'source-link')
+  .attr('href', 'https://github.com/joshmcarthur/nz-transmission-lines')
+  .text('View Source');
 
 d3.json("data/nz.json", function(error, nz) {
   if (error) { return console.error(error); }
