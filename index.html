@@ -21,6 +21,18 @@ body { background: #3F51B5; }
   text-decoration: none;
 }
 
+h1.title {
+  position: absolute;
+  top: 0;
+  margin: 0;
+  padding: 8px;
+  font-size: 16px;
+  font-family: monospace;
+  font-weight: 300;
+  color: #C5CAE9;
+  opacity: 0.5;
+}
+
 .attribution { left: 0; }
 .source-link { right: 0; }
 
@@ -43,7 +55,8 @@ var projection = d3.geo.mercator()
 
 var zoomed = function() {
   container.attr('transform', "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
-  container.selectAll('.place-label').style('font-size', 8 / d3.event.scale + 'px');
+  container.selectAll('.place-label')
+    .style('font-size', 8 / d3.event.scale + 'px');
   container.selectAll('.transmission-line').style('stroke-width', 0.5 / d3.event.scale + 'px');
 }
 
@@ -63,15 +76,6 @@ var container = svg.append('g');
 var path = d3.geo.path()
   .projection(projection)
   .pointRadius(2);
-
-var attribution = d3.select('body').append('cite')
-  .attr('class', 'attribution')
-  .text('Transmission Line data courtesy of Transpower: Licensed CC BY 3.0 NZ.');
-
-var source = d3.select('body').append('a')
-  .attr('class', 'source-link')
-  .attr('href', 'https://github.com/joshmcarthur/nz-transmission-lines')
-  .text('View Source');
 
 svg.append("rect")
     .attr("class", "overlay")
@@ -120,3 +124,9 @@ d3.json("data/nz.json", function(error, nz) {
 });
 
 </script>
+
+<h1 class="title">NZ Transmission Lines</h1>
+<cite class="attribution">Transmission Line data courtesy of Transpower: Licensed CC BY 3.0 NZ.</cite>
+<a href="https://github.com/joshmcarthur/nz-transmission-lines" class="source-link">View Source</a>
+
+</body>
