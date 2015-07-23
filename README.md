@@ -21,7 +21,7 @@ Only the processed data that is used to present the visualisation is included. S
 * Combine both GeoJSON files in a compactor representation using [TopoJSON](https://github.com/mbostock/topojson): `./../node_modules/topojson/bin/topojson -o nz.json --id-property SU_A3 --properties name=NAME -- new_zealand.json places.json`
 * You can now remove the countries and places shapefiles, and the GeoJSON files (new_zealand.json and places.json) - `nz.json` now contains data from both of these files.
 
-##### Transmission Lines
+#### Transmission Lines
 
 Transpower has a [an ArcGIS REST Server](https://spatial.transpower.co.nz/arcgis/rest/services) available, but at the time of writing, the query interface was throwing a `-2147024809` error - from some basic Googling, this seems to be a configuration error on their part. Instead, I've extracted the object IDs from the ArcGIS map in a web browser, and then written a node script to download the object data using the REST API.
 
