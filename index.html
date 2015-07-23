@@ -8,6 +8,7 @@ body { background: #3F51B5; }
 .new-zealand-boundary { fill: #303F9F; }
 .place { fill: #C5CAE9; opacity: 0.5; pointRadius: 1px; }
 .place-label { color: #C5CAE9; opacity: 0.5; font-size: 10px; font-family: sans-serif; }
+.transmission-line { stroke: #FFEB3B; stroke-width: 0.5; fill: transparent; }
 
 </style>
 <body>
@@ -55,6 +56,18 @@ d3.json("data/nz.json", function(error, nz) {
   svg.selectAll(".place-label")
     .attr("x", function(d) { return d.geometry.coordinates[0] > 174? 6 : -6; })
     .style("text-anchor", function(d) { return d.geometry.coordinates[0] > 174 ? "start" : "end"; });
+
+  d3.json('data/transmissionLines.json', function(error, json) {
+    if (error) { console.error(error); }
+    var lines = topojson.feature(json, json.objects.transmissionLinesGeo).features;
+    var lineCount = lines.length;
+
+    svg.selectAll('path')
+      .data(lines)
+    .enter().append('path')
+      .attr('d', path)
+      .attr('class', 'transmission-line');
+  });
 });
 
 </script>
