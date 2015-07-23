@@ -5,8 +5,6 @@ var objectIds = JSON.parse(fs.readFileSync('./data/transpowerObjectIds.json', 'u
 var host      = 'https://spatial.transpower.co.nz';
 var stream    = fs.createWriteStream('./data/transpowerTransmissionLinesArc.json');
 
-console.log(host + buildPath());
-
 http.get(host + buildPath(), function(res) {
   res.pipe(stream);
 })
